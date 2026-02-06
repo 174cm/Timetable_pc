@@ -1,0 +1,37 @@
+name: Build Executable
+
+on:
+  push:
+    branches: [ "main" ] # 메인 브랜치에 푸시될 때 실행
+
+jobs:
+  build:
+    runs-on: windows-latest # 윈도우 실행 파일이므로 윈도우 서버에서 빌드
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller --noconsole --onefile --name "SystemScheduler" main.py
+        # --noconsole: 검은색 터미널 창 안 뜨게 함
+        # --onefile: 파일 하나로 합침
+        # main.py 부분을 실제 파일 이름으로 바꾸세요 (예: 1.py)
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SystemScheduler-Exe
+          path: dist/SystemScheduler.exe
