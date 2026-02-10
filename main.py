@@ -3,7 +3,7 @@ import os
 import time
 import threading
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from tkinter import messagebox
 from PIL import Image, ImageDraw
 import pystray
