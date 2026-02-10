@@ -17,7 +17,7 @@ class ModernShutdownApp(ctk.CTk):
         super().__init__()
 
         # 기본 설정
-        self.title("System Scheduler Pro")
+        self.title("ShutdownApp")
         self.geometry("400x580")
         self.configure(fg_color="#1a1a1a")
 
